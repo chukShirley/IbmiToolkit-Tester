@@ -1,0 +1,75 @@
+
+<pgm name='QGYOLOBJ' lib='QSYS' >
+    <parm io='out' comment='1. receiver. do not receive anything here. Wait till Get List Entry'>
+        <data type='1h' comment='use hole type because do not expect data at this stage' />
+    </parm>
+    <parm io='in' comment='2. Length of receiver variable'>
+        <data var='receiverLen' type='10i0' comment='format 0700 should have size 672.'>672</data>
+    </parm>
+    <parm io='out' comment='3. List information'>
+        <ds var='listinfo' comment='Open list information format (common to all lists)'>
+            <data var='totalRecords' comment='Total records' type='10i0' />
+            <data var='returnedRecords' comment='Records returned' type='10i0' />
+            <data var='requestHandle' comment='Request handle: binary/hex' type='4b' />
+            <data var='recordLength' comment='Record length' type='10i0' />
+            <data var='infoComplete' comment='Information complete indicator. C=complete, I=incomplete, P=partial, more to get in Get List Entries' type='1a' />
+            <data var='timeAndDateCreated' comment='Time and date created' type='13a' />
+            <data var='listStatus' comment='List status indicator' type='1a' />
+            <data var='reserved' comment='Reserved' type='1h' />
+            <data var='lengthReturned' comment='Length of information returned' type='10i0' />
+            <data var='firstRecordNumber' comment='Number of first record returned in receiver variable' type='10i0' />
+            <data var='reserved2' comment='Reserved (another one)' type='40h' />
+        </ds>
+    </parm>
+    <parm io='in' comment='4. Number of records to return. Use zero to offload to Get List Entries API'>
+        <data var='numRecsDesired' type='10i0'>0</data>
+    </parm>
+    <parm io='in' comment='5. Sort information' >
+        <ds var='sortInfo'>
+            <data var='numSortKeys' comment='Number of keys to sort on. Use zero' type='10i0'>0</data>
+        </ds>
+    </parm>
+    <parm io='in' comment='6. Object and library name'>
+        <ds var='objectAndLibrary'>
+            <data var='object' type='10a'>CWDEMO</data>
+            <data var='library' type='10a'>QSYS</data>
+        </ds>
+    </parm>
+    <parm io='in' comment='7. Object type'>
+        <data var='objType' type='10a'>*LIB</data>
+    </parm>
+    <parm io='in' comment='8. Authority control'>
+        <ds var='authorityControlFormat'>
+            <data var='lengthOfFormat' type='10i0' comment='28 is minimum size: no authorities'>28</data>
+            <data var='callLevel' type='10i0' comment='Call level'>0</data>
+            <data var='offsetObjAuth' type='10i0' comment='Displacement to object authorities'>0</data>
+            <data var='numObjAuth' type='10i0' comment='Number of object authorities'>0</data>
+            <data var='offsetLibAuth' type='10i0' comment='Displacement to library authorities'>0</data>
+            <data var='numLibAuth' type='10i0' comment='Number of library authorities'>0</data>
+            <data var='reserved' type='10i0' comment='Reserved'></data>
+        </ds>
+    </parm>
+    <parm io='in' comment='9. Selection control'>
+        <ds var='selectionControlFormat'>
+            <data var='lengthOfFormat' type='10i0' comment='21 is minimum length: one selection value'>21</data>
+            <data var='selectOmitStatus' type='10i0' comment='0=select on status, 1=omit'>0</data>
+            <data var='offsetStatuses' type='10i0' comment='Displacement to statuses'>20</data>
+            <data var='numStatuses' type='10i0' comment='Number of statuses. minimum=1'>1</data>
+            <data var='reserved' type='10i0' comment='Reserved'></data>
+            <data var='status' type='1a' comment='One status field, with * meaning all'>*</data>
+        </ds>
+    </parm>
+    <parm io='in' comment='10. Number of keyed fields to return'>
+        <data var='numKeyedFields' type='10i0'>1</data>
+    </parm>
+    <parm io='in' comment='11. Array of keys of fields to return'>
+        <ds var='keysToRequest'>
+            <data var='key' type='10i0' comment='use key field format 0700 because it has everything.'>0700</data>
+        </ds>
+    </parm>
+    <parm io='both' comment='12. Error code structure'>
+        <ds var='errorDs'>
+            <data var='errbytes' type='10i0' comment='Size of DS. Use 0 to force errors to bubble up to the job'>0</data>
+        </ds>
+    </parm>
+</pgm>

@@ -1,0 +1,11 @@
+{
+  "minimum-stability":"dev",
+  "require-dev": {
+    "zendtech/ibmitoolkit": "dev-master"
+  },
+  "autoload":{
+    "psr-4":{
+      "ToolkitTester\\":"src/ToolkitTester"
+    }
+  }
+}

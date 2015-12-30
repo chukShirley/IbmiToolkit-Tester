@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<script>
+    <pgm name='GETNUMBER' lib='ACSTEST' >
+        <parm comment='numIn'><data var='numIn' type='9p0'>123456789</data></parm>
+        <parm io='o' comment='numOut'><data var='numOut' type='9p0'>0</data></parm>
+    </pgm>
+</script>
